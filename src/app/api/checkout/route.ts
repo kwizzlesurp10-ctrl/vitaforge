@@ -69,7 +69,13 @@ export async function POST(req: NextRequest) {
       ],
       success_url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/`,
-      metadata:    { plan, billing, source: "vitaforge-landing" },
+      metadata: {
+        plan,
+        billing,
+        source: "vitaforge-landing",
+        product_type: "digital",
+        access: "dashboard+downloads",
+      },
       allow_promotion_codes: true,
     });
 
