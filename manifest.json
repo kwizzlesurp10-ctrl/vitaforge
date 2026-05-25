@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "VitaForge Agentic DOM Extension",
+  "short_name": "VitaForge",
+  "version": "2.0.0",
+  "description": "Agentic DOM extension with design iteration, self-healing QA, OpenTelemetry, and CI automation.",
+  "minimum_chrome_version": "121",
+  "action": {
+    "default_title": "VitaForge Agent",
+    "default_popup": "popup/index.html"
+  },
+  "options_page": "options/index.html",
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "offscreen",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content-script.js"],
+      "css": ["content-script.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*", "content-script.css"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:* https://*/*;"
+  }
+}
